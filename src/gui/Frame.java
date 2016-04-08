@@ -14,6 +14,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import system.University;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -25,7 +27,9 @@ public class Frame extends JFrame {
 	private NewDepartmentPanel dptPanel;
 	private MainMenu mainMenuPanel;
 	private NewProfPanel newProfPanel;
-
+	private SearchPanel searchPanel;
+	
+	private University university = new University();
 	/**
 	 * Launch the application.
 	 */
@@ -55,6 +59,7 @@ public class Frame extends JFrame {
 		newStudentPanel = new NewStudentPanel();
 		dptPanel = new NewDepartmentPanel();
 		newProfPanel = new NewProfPanel();
+		searchPanel = new SearchPanel();
 
 		// add the main menu panel to the window
 		add(mainMenuPanel);
@@ -141,6 +146,28 @@ public class Frame extends JFrame {
 			@Override
 			public void EventOccurred(NewProfEvent e) {
 				// TODO create a new professor object with the given data in the event
+				
+				university.addprof(e.getFirstName() + " " + e.getLastName());
+			}
+		});
+	}
+	
+	private void initSearchPanelListener(){
+		searchPanel.setSearchPanelListener(new SearchPanelListener() {
+			
+			@Override
+			public void SearchEventOccurred(SearchPanelEvent e) {
+				int type = e.getType();
+				switch(type){
+				case 1:
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					break;
+				}
 			}
 		});
 	}
