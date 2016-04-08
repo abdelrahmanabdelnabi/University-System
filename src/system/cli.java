@@ -7,7 +7,6 @@ public class cli {
 		String[][] usage = {
 				{"q"	,""	,"quit"},
 				{"a[?]"	,""	,"Add entity."},
-				{"p[?]"	,""	,"Print data"},
 				{"e[?]"	,""	,"Edit data"},
 				{"f[?]"	,""	,"Find"},
 				{"d[?]"	,""	,"delete"},
@@ -31,9 +30,6 @@ public class cli {
 				break;
 			case 'a':
 				addentity(input);
-				break;
-			case 'p':
-				print(input);
 				break;
 			case 'e':
 				edit(input);
@@ -174,15 +170,87 @@ public class cli {
 			Print.error("Unknown command");
 			Print.help("see a? for help");
 			
-		}	}
-	static void print(char [] input){
-		//TODO
-	}
+		}
+}
 	static void edit(char [] input){
-		//TODO
-	}
+			//TODO
+		}
 	static void find(char [] input){
-		//TODO
+		String[][] usage = {
+				{"f?"	,""				,"show this help"},
+				{"fc"	,"[name|id]"	,"find course"},
+				{"fs"	,"[name|id]"	,"find student"},
+				{"fd"	,"[name|id]"	,"add departement"},
+				{"fp"	,"[name|id]"	,"add professor"},
+				};
+		if (input.length == 1){
+			Print.help("see f? for help");
+			return;
+		}
+		switch (input[1]){
+		case 's':{
+			Object s;
+			try{
+				s = u.findstudent(Integer.parseInt(new String(input,2,input.length-3).trim()));
+			}catch(java.lang.NumberFormatException e){
+				s  = u.findstudent(new String(input,2,input.length-3).trim());
+			}
+			if(s == null){
+				Print.error("Student not found");
+				return;
+			}
+			//TODO print data
+			break;
+		}
+		case 'c':{
+			Object c;
+			try{
+				c = u.findcourse(Integer.parseInt(new String(input,2,input.length-3).trim()));
+			}catch(java.lang.NumberFormatException e){
+				c  = u.findcourse(new String(input,2,input.length-3).trim());
+			}
+			if(c == null){
+				Print.error("Course not found");
+				return;
+			}
+			//TODO print data
+			break;
+		}
+		case 'd':{
+			Object d;
+			try{
+				d = u.finddep(Integer.parseInt(new String(input,2,input.length-3).trim()));
+			}catch(java.lang.NumberFormatException e){
+				d  = u.finddep(new String(input,2,input.length-3).trim());
+			}
+			if(d == null){
+				Print.error("departement not found");
+				return;
+			}
+			//TODO print data
+			break;
+		}
+		case 'p':{
+			Object p;
+			try{
+				p = u.findprof(Integer.parseInt(new String(input,2,input.length-3).trim()));
+			}catch(java.lang.NumberFormatException e){
+				p  = u.findprof(new String(input,2,input.length-3).trim());
+			}
+			if(p == null){
+				Print.error("professor not found");
+				return;
+			}
+			//TODO print data
+			break;
+		}
+		case '?':
+			Print.usage(usage);
+			break;
+		default:
+			Print.error("Unknown command");
+			Print.help("see f? for help");
+			
+		}
 	}
-
 }

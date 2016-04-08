@@ -25,6 +25,7 @@ public class University {
 		prof.add(p);
 		//TODO sort
 	}
+
 	public boolean delcourse(int id){
 		if(id> course.size())
 			return false;
@@ -97,5 +98,49 @@ public class University {
 				return delprof(p.getId());
 		return false;
 	}
-	
+
+	public Course findcourse(int id){
+		if(id> course.size())
+			return null;
+		return course.get(id);
+	}
+	public Course findcourse(String name){
+		for(Course c:course)
+			if(c.getName().equals(name))
+				return c;
+		return null;
+	}
+	public Student findstudent(int id){
+		if(id> student.size())
+			return null;
+		return student.get(id);
+	}
+	public Student findstudent(String name){
+		for(Student s:student)
+			if(s.getName().equals(name))
+				return s;
+		return null;
+	}
+	public Professor findprof(int id){
+		if(id> prof.size())
+			return null;
+		return prof.get(id);
+	}
+	public Professor findprof(String name){
+		for(Professor p:prof)
+			if(p.getName().equals(name))
+				return p;
+		return null;
+	}
+	public Departement finddep(int id){
+		if(id> dep.size())
+			return null;
+		return dep.get(id);
+	}
+	public Departement finddep(String name){
+		for(Departement d:dep)
+			if(d.getName().equals(name))
+				return d;
+		return null;
+	}
 }
