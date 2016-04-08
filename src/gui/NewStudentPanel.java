@@ -23,12 +23,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class NewStudentPanel extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField firstNameField;
+	private JTextField lastNameField;
+	private JTextField GPAField;
+	private JTextField phoneNumberField;
+	private JTextField emailField;
 
+	private StudentPanelListener listener;
 	/**
 	 * Create the panel.
 	 */
@@ -72,30 +73,30 @@ public class NewStudentPanel extends JPanel {
 		lblEmail.setBounds(30, 189, 85, 14);
 		add(lblEmail);
 		
-		textField = new JTextField();
-		textField.setBounds(150, 57, 163, 20);
-		add(textField);
-		textField.setColumns(10);
+		firstNameField = new JTextField();
+		firstNameField.setBounds(150, 57, 163, 20);
+		add(firstNameField);
+		firstNameField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(150, 84, 163, 20);
-		add(textField_1);
+		lastNameField = new JTextField();
+		lastNameField.setColumns(10);
+		lastNameField.setBounds(150, 84, 163, 20);
+		add(lastNameField);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(150, 129, 71, 20);
-		add(textField_2);
+		GPAField = new JTextField();
+		GPAField.setColumns(10);
+		GPAField.setBounds(150, 129, 71, 20);
+		add(GPAField);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(150, 160, 163, 20);
-		add(textField_3);
+		phoneNumberField = new JTextField();
+		phoneNumberField.setColumns(10);
+		phoneNumberField.setBounds(150, 160, 163, 20);
+		add(phoneNumberField);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(150, 187, 233, 20);
-		add(textField_4);
+		emailField = new JTextField();
+		emailField.setColumns(10);
+		emailField.setBounds(150, 187, 233, 20);
+		add(emailField);
 		
 		JLabel lblDepartment = new JLabel("Department");
 		lblDepartment.setHorizontalAlignment(SwingConstants.LEFT);
@@ -110,9 +111,48 @@ public class NewStudentPanel extends JPanel {
 		add(lblCourses);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(338, 111, 60, 20);
+		comboBox.setBounds(150, 218, 93, 20);
 		comboBox.addItem("compu");
 		comboBox.addItem("electro");
 		add(comboBox);
+		
+		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String action = "submit";
+				String firstName = firstNameField.getText();
+				String lastName = lastNameField.getText();
+				String email = emailField.getText();
+				String phoneNumber = phoneNumberField.getText();
+				
+				StudentPanelEvent ev = new StudentPanelEvent(this, action);
+				ev.setFirstName(firstName);
+				ev.setLastName(lastName);
+				ev.setEmail(email);
+				ev.setPhoneNumber(phoneNumber);
+				
+				if(listener != null){
+					listener.StudentPanelEventOccurred(ev);
+				}
+			}
+		});
+		btnSubmit.setBounds(250, 334, 89, 23);
+		add(btnSubmit);
+		
+		JButton btnMainMenu = new JButton("Main Menu");
+		btnMainMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				StudentPanelEvent ev = new StudentPanelEvent(this, "main");
+				
+				if(listener != null)
+					listener.StudentPanelEventOccurred(ev);
+			}
+		});
+		btnMainMenu.setBounds(445, 334, 89, 23);
+		add(btnMainMenu);
+	}
+	
+	public void setStudentPanelListener( StudentPanelListener listener){
+		this.listener = listener;
 	}
 }

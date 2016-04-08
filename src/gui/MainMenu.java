@@ -50,6 +50,15 @@ public class MainMenu extends JPanel {
 		JButton searchBtn = new JButton("Search");
 		searchBtn.setBounds(100, 164, 120, 23);
 		add(searchBtn);
+		searchBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainMenuEvent ev = new MainMenuEvent(this, "search");
+				
+				if(listener != null){
+					listener.MenuEventOccurred(ev);
+				}
+			}
+		});
 
 		JLabel lblAlexandriaUniversitySystem = new JLabel(
 				"Alexandria University System");

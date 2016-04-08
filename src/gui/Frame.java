@@ -23,13 +23,14 @@ import java.awt.event.ActionEvent;
 public class Frame extends JFrame {
 
 	private AddMenuPanel addMenuPane;
-	private JPanel newStudentPanel;
+	private NewStudentPanel newStudentPanel;
 	private NewDepartmentPanel dptPanel;
 	private MainMenu mainMenuPanel;
 	private NewProfPanel newProfPanel;
 	private SearchPanel searchPanel;
-	
+
 	private University university = new University();
+
 	/**
 	 * Launch the application.
 	 */
@@ -69,7 +70,8 @@ public class Frame extends JFrame {
 		initAddMenuListener();
 		initNewDptListener();
 		initNewProfListener();
-
+		initSearchPanelListener();
+		initStudentPanelListener();
 	}
 
 	/*
@@ -88,6 +90,11 @@ public class Frame extends JFrame {
 					setContentPane(addMenuPane);
 					addMenuPane.setVisible(true);
 					revalidate();
+				} else if (action.equals("search")) {
+					revalidate();
+					setContentPane(searchPanel);
+					searchPanel.setVisible(true);
+					revalidate();
 				}
 
 			}
@@ -104,70 +111,107 @@ public class Frame extends JFrame {
 				// TODO check the action that was selected using e.getAction()
 				// and then set the new panel accordingly
 				String action = e.getAction();
-				if(action.equals("student")){
+				if (action.equals("student")) {
 					setContentPane(newStudentPanel);
 					newStudentPanel.setVisible(true);
 					revalidate();
-				}
-				else if(action.equals("department")){
+				} else if (action.equals("department")) {
 					setContentPane(dptPanel);
 					dptPanel.setVisible(true);
 					revalidate();
-				}
-				else if(action.equals("professor")){
+				} else if (action.equals("professor")) {
 					setContentPane(newProfPanel);
 					newProfPanel.setVisible(true);
 					revalidate();
 				}
 
-				
 			}
 		});
 	}
-	
-	private void initNewDptListener(){
+
+	private void initNewDptListener() {
 		dptPanel.setEventListener(new NewDepartmentListener() {
-			
+
 			@Override
 			public void departmentEventOccurred(NewDepartmentEvent e) {
 				// check the action triggered
 				String action = e.getAction();
-				if( action.equals("new") ){
+				if (action.equals("new")) {
 					// do as appropriate
 				}
-				
+
 			}
 		});
 	}
-	
-	private void initNewProfListener(){
+
+	private void initNewProfListener() {
 		newProfPanel.setNewProfListener(new NewProfListener() {
-			
+
 			@Override
 			public void EventOccurred(NewProfEvent e) {
-				// TODO create a new professor object with the given data in the event
-				
+				// TODO create a new professor object with the given data in the
+				// event
+
 				university.addprof(e.getFirstName() + " " + e.getLastName());
 			}
 		});
 	}
-	
-	private void initSearchPanelListener(){
+
+	private void initSearchPanelListener() {
 		searchPanel.setSearchPanelListener(new SearchPanelListener() {
-			
+
 			@Override
 			public void SearchEventOccurred(SearchPanelEvent e) {
 				int type = e.getType();
-				switch(type){
+
+				// TODO add other cases
+				switch (type) {
 				case 1:
+					if (university.findstudent(e.getQuery()) != null) {
+						String result = university.findstudent(e.getQuery())
+								.getName();
+						searchPanel.getTextArea().setText(result);
+					} else {
+						searchPanel.getTextArea().setText("no results found");
+					}
 					break;
 				case 2:
+					university.findprof(e.getQuery());
 					break;
 				case 3:
 					break;
 				case 4:
 					break;
 				}
+			}
+		});
+	}
+
+	private void initStudentPanelListener() {
+		newStudentPanel.setStudentPanelListener(new StudentPanelListener() {
+
+			@Override
+			public void StudentPanelEventOccurred(StudentPanelEvent ev) {
+				String action = ev.getAction();
+
+				if (action.equals("main")) {
+					// return to main menu
+					revalidate();
+					setContentPane(mainMenuPanel);
+					mainMenuPanel.setVisible(true);
+					revalidate();
+				}
+
+				else if (action.equals("submit")) {
+
+				}
+				String firstName = ev.getFirstName();
+				String lastName = ev.getLastName();
+				String email = ev.getEmail();
+				String phoneNumber = ev.getPhoneNumber();
+				
+				// create a student with this data
+				university.addstudent(firstName + " " + lastName);
 			}
 		});
 	}

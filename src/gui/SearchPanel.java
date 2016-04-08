@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -62,6 +64,21 @@ public class SearchPanel extends JPanel {
 		JButton btnSearch = new JButton("Search");
 		btnSearch.setBounds(390, 128, 89, 23);
 		add(btnSearch);
+		btnSearch.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String query = SearchField.getText();
+				int type = getSelectedBtn();
+				
+				SearchPanelEvent ev = new SearchPanelEvent(this, query, type);
+
+				if(listener != null){
+					listener.SearchEventOccurred(ev);
+				}
+				
+			}
+		});
 		
 		group = new ButtonGroup();
 		group.add(StudentRBtn);
@@ -73,5 +90,21 @@ public class SearchPanel extends JPanel {
 	
 	public void setSearchPanelListener(SearchPanelListener listener){
 		this.listener = listener;
+	}
+	
+	public JTextArea getTextArea(){
+		return textArea;
+	}
+	
+	private int getSelectedBtn(){
+		if(StudentRBtn.isSelected())
+			return 1;
+		if(ProfessorRBtn.isSelected())
+			return 2;
+		if(CourseRBtn.isSelected())
+			return 3;
+		if(DepartmentRBtn.isSelected())
+			return 4;
+		return 0;
 	}
 }
