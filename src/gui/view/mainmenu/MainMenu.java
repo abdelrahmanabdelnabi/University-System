@@ -38,12 +38,6 @@ public class MainMenu extends JPanel {
 				}
 			}
 		});
-		
-		
-		
-		JButton editBtn = new JButton("Edit");
-		editBtn.setBounds(223, 97, 120, 23);
-		add(editBtn);
 
 		JButton EnrollBtn = new JButton("Enroll");
 		EnrollBtn.addActionListener(new ActionListener() {
@@ -55,11 +49,11 @@ MainMenuEvent ev = new MainMenuEvent(this, "enroll");
 				}
 			}
 		});
-		EnrollBtn.setBounds(223, 190, 120, 23);
+		EnrollBtn.setBounds(223, 181, 120, 23);
 		add(EnrollBtn);
 
 		JButton searchBtn = new JButton("Search/Delete");
-		searchBtn.setBounds(223, 143, 120, 23);
+		searchBtn.setBounds(223, 116, 120, 23);
 		add(searchBtn);
 		searchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

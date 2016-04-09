@@ -139,6 +139,7 @@ public class NewProfPanel extends JPanel {
 
 				// set each event variable with the corresponding input
 				NewProfEvent ev = new NewProfEvent(this);
+				ev.setAction("submit");
 				ev.setFirstName(firstName);
 				ev.setLastName(lastName);
 				ev.setPhoneNumber(phoneNumber);
