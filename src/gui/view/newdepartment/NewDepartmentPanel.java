@@ -1,21 +1,23 @@
-package gui;
+package gui.view.newdepartment;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class NewDepartmentPanel extends JPanel {
 	private JLabel titleLabel;
 	private NewDepartmentListener listener;
 	private JTextField DptNameField;
 
+	private List<String> courses;
 	/**
 	 * Create the panel.
 	 */
@@ -65,5 +67,9 @@ public class NewDepartmentPanel extends JPanel {
 
 	public void setEventListener(NewDepartmentListener listener) {
 		this.listener = listener;
+	}
+	
+	public void setCourses(List<String> courses){
+		this.courses = courses;
 	}
 }

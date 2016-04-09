@@ -1,4 +1,4 @@
-package gui;
+package gui.view.newprof;
 
 import java.util.EventObject;
 

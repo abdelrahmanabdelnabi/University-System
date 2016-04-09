@@ -1,4 +1,4 @@
-package gui;
+package gui.view.searchpanel;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -22,6 +22,7 @@ public class SearchPanel extends JPanel {
 	private ButtonGroup group;
 	
 	private SearchPanelListener listener;
+	private JButton btnDelete;
 
 	/**
 	 * Create the panel.
@@ -30,39 +31,39 @@ public class SearchPanel extends JPanel {
 		setLayout(null);
 		
 		StudentRBtn = new JRadioButton("student");
-		StudentRBtn.setBounds(50, 80, 109, 23);
+		StudentRBtn.setBounds(50, 36, 109, 23);
 		StudentRBtn.setSelected(true);
 		add(StudentRBtn);
 		
 		ProfessorRBtn = new JRadioButton("professor");
-		ProfessorRBtn.setBounds(186, 80, 109, 23);
+		ProfessorRBtn.setBounds(186, 36, 109, 23);
 		add(ProfessorRBtn);
 		
 		CourseRBtn = new JRadioButton("course");
-		CourseRBtn.setBounds(315, 80, 109, 23);
+		CourseRBtn.setBounds(315, 36, 109, 23);
 		add(CourseRBtn);
 		
 		DepartmentRBtn = new JRadioButton("department");
-		DepartmentRBtn.setBounds(437, 80, 109, 23);
+		DepartmentRBtn.setBounds(437, 36, 109, 23);
 		add(DepartmentRBtn);
 		
 		JLabel lblName = new JLabel("Name");
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblName.setBounds(60, 127, 49, 23);
+		lblName.setBounds(60, 83, 49, 23);
 		add(lblName);
 		
 		SearchField = new JTextField();
-		SearchField.setBounds(150, 129, 160, 20);
+		SearchField.setBounds(150, 85, 160, 20);
 		add(SearchField);
 		SearchField.setColumns(10);
 		
 		textArea = new JTextArea();
 		textArea.setEditable(false);
-		textArea.setBounds(60, 182, 486, 187);
+		textArea.setBounds(60, 138, 486, 187);
 		add(textArea);
 		
 		JButton btnSearch = new JButton("Search");
-		btnSearch.setBounds(390, 128, 89, 23);
+		btnSearch.setBounds(345, 84, 89, 23);
 		add(btnSearch);
 		btnSearch.addActionListener(new ActionListener() {
 			
@@ -71,7 +72,7 @@ public class SearchPanel extends JPanel {
 				String query = SearchField.getText();
 				int type = getSelectedBtn();
 				
-				SearchPanelEvent ev = new SearchPanelEvent(this, query, type);
+				SearchPanelEvent ev = new SearchPanelEvent(this, "search", query, type);
 
 				if(listener != null){
 					listener.SearchEventOccurred(ev);
@@ -85,6 +86,22 @@ public class SearchPanel extends JPanel {
 		group.add(ProfessorRBtn);
 		group.add(CourseRBtn);
 		group.add(DepartmentRBtn);
+		
+		btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String query = SearchField.getText();
+				int type = getSelectedBtn();
+				
+				SearchPanelEvent ev = new SearchPanelEvent(this, "delete", query, type);
+
+				if(listener != null){
+					listener.SearchEventOccurred(ev);
+				}
+			}
+		});
+		btnDelete.setBounds(470, 84, 89, 23);
+		add(btnDelete);
 
 	}
 	

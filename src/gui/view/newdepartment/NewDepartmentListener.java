@@ -1,4 +1,4 @@
-package gui;
+package gui.view.newdepartment;
 
 import java.util.EventListener;
 

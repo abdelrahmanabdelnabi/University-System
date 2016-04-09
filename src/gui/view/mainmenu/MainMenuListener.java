@@ -1,4 +1,4 @@
-package gui;
+package gui.view.mainmenu;
 
 import java.util.EventListener;
 

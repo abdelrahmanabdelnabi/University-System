@@ -1,9 +1,10 @@
-package gui;
+package gui.view.newprof;
 
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -25,6 +26,9 @@ public class NewProfPanel extends JPanel {
 	private JRadioButton maleRBtn;
 	private JRadioButton femaleRBtn;
 	private ButtonGroup group;
+	
+	private List<String> courses;
+	
 	private NewProfListener listener;
 	/**
 	 * Create the panel.
@@ -154,5 +158,9 @@ public class NewProfPanel extends JPanel {
 	
 	public void setNewProfListener(NewProfListener listener){
 		this.listener = listener;
+	}
+	
+	public void setCourses(List<String> courses){
+		this.courses = courses;
 	}
 }

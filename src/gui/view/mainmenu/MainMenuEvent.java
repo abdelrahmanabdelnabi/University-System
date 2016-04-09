@@ -1,16 +1,16 @@
-package gui;
+package gui.view.mainmenu;
 
 import java.util.EventObject;
 
-public class MenuPanelEvent extends EventObject {
+public class MainMenuEvent extends EventObject {
 
 	private String action;
-
-	public MenuPanelEvent(Object source) {
+	
+	public MainMenuEvent(Object source) {
 		super(source);
 	}
-
-	public MenuPanelEvent(Object source, String action) {
+	
+	public MainMenuEvent(Object source, String action) {
 		super(source);
 		this.action = action;
 	}
@@ -18,8 +18,10 @@ public class MenuPanelEvent extends EventObject {
 	public String getAction() {
 		return action;
 	}
-	
+
 	public void setAction(String action) {
 		this.action = action;
 	}
+	
+
 }

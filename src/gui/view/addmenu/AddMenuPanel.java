@@ -1,4 +1,4 @@
-package gui;
+package gui.view.addmenu;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -61,6 +61,15 @@ public class AddMenuPanel extends JPanel {
 		});
 
 		JButton CourseBtn = new JButton("New Course");
+		CourseBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuPanelEvent ev = new MenuPanelEvent(this, "course");
+
+				if (menuPanelListener != null) {
+					menuPanelListener.menuEventOccurred(ev);
+				}
+			}
+		});
 		CourseBtn.setBounds(160, 210, 130, 23);
 		add(CourseBtn);
 

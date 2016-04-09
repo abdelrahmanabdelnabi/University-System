@@ -1,4 +1,4 @@
-package gui;
+package gui.view.searchpanel;
 
 import java.util.EventListener;
 

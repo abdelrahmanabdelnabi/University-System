@@ -1,4 +1,4 @@
-package gui;
+package gui.view.newstudent;
 
 import java.util.EventObject;
 
@@ -11,6 +11,8 @@ public class StudentPanelEvent extends EventObject{
 	private String lastName;
 	private String email;
 	private String phoneNumber;
+	private String address;
+	private int age;
 	
 	public StudentPanelEvent(Object arg0) {
 		super(arg0);
@@ -59,6 +61,22 @@ public class StudentPanelEvent extends EventObject{
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
 	}
 	
 	

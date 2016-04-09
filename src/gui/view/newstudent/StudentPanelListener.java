@@ -1,4 +1,4 @@
-package gui;
+package gui.view.newstudent;
 
 import java.util.EventListener;
 
