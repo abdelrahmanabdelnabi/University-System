@@ -32,6 +32,9 @@ public class Print {
 	static String Color_BCYAN		= "\u001b[1;36m";
 	static String Color_BBLUE		= "\u001b[1;34m";
 	static String Color_BGRAY		= "\u001b[1;38m";
+	static void entry(String s1, String s2){
+		System.out.println(Print.Color_BMAGENTA+s1+Print.Color_MAGENTA+s2+Print.Color_RESET);
+	}
 	static void usage (String [][]s){
 		int j=0;
 		//TODO add usage
@@ -46,6 +49,9 @@ public class Print {
 	}
 	static void error(String s){
 		System.out.println(Print.Color_RED+"[x] "+Print.Color_RESET+s);
+	}
+	static void info(String s){
+		System.out.println(Print.Color_BLUE+"[!]"+Print.Color_RESET+s);
 	}
 	static void help(String s){
 			System.out.println(Print.Color_YELLOW+s+Print.Color_RESET);
