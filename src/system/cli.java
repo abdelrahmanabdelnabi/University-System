@@ -3,16 +3,15 @@ package system;
 import java.util.*;
 public class cli {
 	static University u = new University();
+	static Scanner reader = new Scanner(System.in);	
 	public static void main(String args[]){
 		String[][] usage = {
 				{"q"	,""	,"quit"},
 				{"a[?]"	,""	,"Add entity."},
-				{"e[?]"	,""	,"Edit data"},
 				{"f[?]"	,""	,"Find"},
 				{"d[?]"	,""	,"delete"},
 				{"?"	,""	,"Show this help"},
 				};
-		Scanner reader = new Scanner(System.in);
 		while(true){
 			Print.printcursor("");
 			String nxt = reader.nextLine();
@@ -30,9 +29,6 @@ public class cli {
 				break;
 			case 'a':
 				addentity(input);
-				break;
-			case 'e':
-				edit(input);
 				break;
 			case 'f':
 				find(input);
@@ -61,31 +57,31 @@ public class cli {
 		}
 		switch (input[1]){
 		case 'c':{
-			String name = new String(input,2,input.length-3).trim() ;
+			String name = new String(input,2,input.length-2).trim() ;
 			u.addcourse(name);
 			Print.done("Course added");
-			//TODO print help to edit content
+			Print.help("edit/view student data via fc "+name);
 			break;
 		}
 		case 's':{
-			String name = new String(input,2,input.length-3).trim() ;
+			String name = new String(input,2,input.length-2).trim() ;
 			u.addstudent(name);
-			Print.done("Course added");
-			//TODO print help to edit content
+			Print.done("Student added");
+			Print.help("edit/view student data via fs "+name);
 			break;
 		}
 		case 'd':{
-			String name = new String(input,2,input.length-3).trim() ;
+			String name = new String(input,2,input.length-2).trim() ;
 			u.adddep(name);
 			Print.done("Course added");
-			//TODO print help to edit content
+			Print.help("edit/view departement data via fd "+name);
 			break;
 		}
 		case 'p':{
-			String name = new String(input,2,input.length-3).trim() ;
+			String name = new String(input,2,input.length-2).trim() ;
 			u.addprof(name);
 			Print.done("Professor added");
-			//TODO print help to edit content
+			Print.help("edit/view professor data via fp "+name);
 			break;
 		}
 		case '?':
@@ -115,9 +111,9 @@ public class cli {
 		case 'c':{
 			boolean deleted;
 			try{
-				deleted = u.delcourse(Integer.parseInt(new String(input,2,input.length-3).trim()));
+				deleted = u.delcourse(Integer.parseInt(new String(input,2,input.length-2).trim()));
 			}catch(java.lang.NumberFormatException e){
-				deleted  = u.delcourse(new String(input,2,input.length-3).trim());
+				deleted  = u.delcourse(new String(input,2,input.length-2).trim());
 			}
 			if(deleted)
 				Print.done("Course deleted");
@@ -128,9 +124,9 @@ public class cli {
 		case 's':{
 			boolean deleted;
 			try{
-				deleted = u.delstudent(Integer.parseInt(new String(input,2,input.length-3).trim()));
+				deleted = u.delstudent(Integer.parseInt(new String(input,2,input.length-2).trim()));
 			}catch(java.lang.NumberFormatException e){
-				deleted  = u.delstudent(new String(input,2,input.length-3).trim());
+				deleted  = u.delstudent(new String(input,2,input.length-2).trim());
 			}
 			if(deleted)
 				Print.done("Student deleted");
@@ -141,9 +137,9 @@ public class cli {
 		case 'd':{
 			boolean deleted;
 			try{
-				deleted = u.deldep(Integer.parseInt(new String(input,2,input.length-3).trim()));
+				deleted = u.deldep(Integer.parseInt(new String(input,2,input.length-2).trim()));
 			}catch(java.lang.NumberFormatException e){
-				deleted  = u.deldep(new String(input,2,input.length-3).trim());
+				deleted  = u.deldep(new String(input,2,input.length-2).trim());
 			}
 			if(deleted)
 				Print.done("Departement deleted");
@@ -154,9 +150,9 @@ public class cli {
 		case 'p':{
 			boolean deleted;
 			try{
-				deleted = u.delprof(Integer.parseInt(new String(input,2,input.length-3).trim()));
+				deleted = u.delprof(Integer.parseInt(new String(input,2,input.length-2).trim()));
 			}catch(java.lang.NumberFormatException e){
-				deleted  = u.delprof(new String(input,2,input.length-3).trim());
+				deleted  = u.delprof(new String(input,2,input.length-2).trim());
 			}
 			if(deleted)
 				Print.done("Professor deleted");
@@ -172,9 +168,6 @@ public class cli {
 			
 		}
 }
-	static void edit(char [] input){
-			//TODO
-		}
 	static void find(char [] input){
 		String[][] usage = {
 				{"f?"	,""				,"show this help"},
@@ -189,59 +182,59 @@ public class cli {
 		}
 		switch (input[1]){
 		case 's':{
-			Object s;
+			Student s;
 			try{
-				s = u.findstudent(Integer.parseInt(new String(input,2,input.length-3).trim()));
+				s = u.findstudent(Integer.parseInt(new String(input,2,input.length-2).trim()));
 			}catch(java.lang.NumberFormatException e){
-				s  = u.findstudent(new String(input,2,input.length-3).trim());
+				s  = u.findstudent(new String(input,2,input.length-2).trim());
 			}
 			if(s == null){
 				Print.error("Student not found");
 				return;
 			}
-			//TODO print data
+			student_cli(s);
 			break;
 		}
 		case 'c':{
-			Object c;
+			Course c;
 			try{
-				c = u.findcourse(Integer.parseInt(new String(input,2,input.length-3).trim()));
+				c = u.findcourse(Integer.parseInt(new String(input,2,input.length-2).trim()));
 			}catch(java.lang.NumberFormatException e){
-				c  = u.findcourse(new String(input,2,input.length-3).trim());
+				c  = u.findcourse(new String(input,2,input.length-2).trim());
 			}
 			if(c == null){
 				Print.error("Course not found");
 				return;
 			}
-			//TODO print data
+			course_cli(c);
 			break;
 		}
 		case 'd':{
-			Object d;
+			Departement d;
 			try{
-				d = u.finddep(Integer.parseInt(new String(input,2,input.length-3).trim()));
+				d = u.finddep(Integer.parseInt(new String(input,2,input.length-2).trim()));
 			}catch(java.lang.NumberFormatException e){
-				d  = u.finddep(new String(input,2,input.length-3).trim());
+				d  = u.finddep(new String(input,2,input.length-2).trim());
 			}
 			if(d == null){
 				Print.error("departement not found");
 				return;
 			}
-			//TODO print data
+			dep_cli(d);
 			break;
 		}
 		case 'p':{
-			Object p;
+			Professor p;
 			try{
-				p = u.findprof(Integer.parseInt(new String(input,2,input.length-3).trim()));
+				p = u.findprof(Integer.parseInt(new String(input,2,input.length-2).trim()));
 			}catch(java.lang.NumberFormatException e){
-				p  = u.findprof(new String(input,2,input.length-3).trim());
+				p  = u.findprof(new String(input,2,input.length-2).trim());
 			}
 			if(p == null){
 				Print.error("professor not found");
 				return;
 			}
-			//TODO print data
+			prof_cli(p);
 			break;
 		}
 		case '?':
@@ -252,5 +245,172 @@ public class cli {
 			Print.help("see f? for help");
 			
 		}
+	}
+	static void student_cli(Student s){
+		Print.entry("Name: ",s.getName());
+		Print.entry("Student ID" ,String.valueOf(s.id));
+		Print.entry("GPA", String.valueOf(s.getGpa()));
+		Print.entry("Professors: ",String.valueOf(s.pid.size())+"Professor");
+		Print.entry("Courses: ",String.valueOf(s.cid.size())+"Professor");
+		Print.entry("Departements: ",String.valueOf(s.did.size())+"Dep.");
+		Print.entry("Age: ",String.valueOf(s.getAge()));
+		Print.entry("Address", s.getAddress());
+		String[][] usage = {
+				{"n"	,"name"			,"edit name"},
+				{"p"	,"gpa"			,"edit gpa"},
+				{"a"	,"address"		,"edit address"},
+				{"g"	,"age"	,		"editage"},
+				{"c+"	,"id"	,"add course"},
+				{"c-"	,"id"	,"delete course"},
+				{"c*"	,""				,"View courses"},
+				{"d+"	,"id"	,"add departement"},
+				{"d-"	,"id"	,"delete departement"},
+				{"d*"	,""				,"view departement"},
+				{"b"	,""				,"back"},
+				{"?"	,""				,"show this help"},
+		};
+		while(true){
+			Print.printcursor(s.getName());
+			String nxt = reader.nextLine();
+			char[] input = nxt.toCharArray();
+			switch (input[0]){
+			case 'n':{
+				s.setName(new String(input,1,input.length-1).trim());
+			}break;
+			case 'p':{
+				s.setGpa(Float.valueOf(new String(input,1,input.length-1).trim()));
+			}break;
+			case 'a':{
+				s.setAddress(new String(input,1,input.length-1).trim());
+			}break;
+			case'g':{
+				s.setAge(Integer.valueOf(new String(input,1,input.length-1).trim()));
+			}break;
+			case 'c':{
+				switch(input[1]){
+				case '+':{
+					s.addcid(Integer.valueOf(new String(input,2,input.length-2).trim()));
+				}break;
+				case '-':{
+					s.deletecid(Integer.valueOf(new String(input,2,input.length-2).trim()));
+				}break;
+				case '*':{
+					for (Integer i:s.cid)
+						Print.info(i.toString()+": "+u.findcourse(i.intValue()).getName());
+				}
+			}}break;
+			case 'd':{
+				switch(input[1]){
+				case '+':{
+					s.adddid(Integer.valueOf(new String(input,2,input.length-2).trim()));
+				}break;
+				case '-':{
+					s.deletedid(Integer.valueOf(new String(input,2,input.length-2).trim()));
+				}break;
+				case '*':{
+					for (Integer i:s.did)
+						Print.info(i.toString()+": "+u.finddep(i.intValue()).getName());
+				}
+			}
+			}break;
+			case 'b':
+				return;
+			case '?':
+				Print.usage(usage);
+				break;
+			default:
+				Print.error("Unknown command");
+				Print.help("see ? for help");
+			
+			}
+		}
+	}
+	static void prof_cli (Professor p){
+		Print.entry("Name: ",p.getName());
+		Print.entry("professor ID" ,String.valueOf(p.id));
+		Print.entry("Students: ",String.valueOf(p.sid.size())+" Student");
+		Print.entry("Courses: ",String.valueOf(p.cid.size())+" Course");
+		Print.entry("Departements: ",String.valueOf(p.did.size())+" Dep.");
+		Print.entry("Age: ",String.valueOf(p.getAge()));
+		Print.entry("Address: ", p.getAddress());
+		String[][] usage = {
+				{"n"	,"name"			,"edit name"},
+				{"a"	,"address"		,"edit address"},
+				{"g"	,"age"	,		"editage"},
+				{"c+"	,"id"	,"add course"},
+				{"c-"	,"id"	,"delete course"},
+				{"c*"	,""				,"View courses"},
+				{"d+"	,"id"	,"add departement"},
+				{"d-"	,"id"	,"delete departement"},
+				{"d*"	,""				,"view departement"},
+				{"b"	,""				,"back"},
+				{"?"	,""				,"show this help"},
+		};
+		while(true){
+			Print.printcursor(p.getName());
+			String nxt = reader.nextLine();
+			char[] input = nxt.toCharArray();
+			switch (input[0]){
+			case'n':{
+				p.setName(new String(input,1,input.length-1).trim());
+				}break;
+			case 'a':{
+				p.setAddress(new String(input,1,input.length-1).trim());
+			}break;
+			case'g':{
+				p.setAge(Integer.valueOf(new String(input,1,input.length-1).trim()));
+			}break;
+			case 'c':{
+				switch(input[1]){
+				case '+':{
+					p.addcid(Integer.valueOf(new String(input,2,input.length-2).trim()));
+				}break;
+				case '-':{
+					p.deletecid(Integer.valueOf(new String(input,2,input.length-2).trim()));
+				}break;
+				case '*':{
+					for (Integer i:p.cid)
+						Print.info(i.toString()+": "+u.findcourse(i.intValue()).getName());
+				}
+			}}break;
+			case 'd':{
+				switch(input[1]){
+				case '+':{
+					p.adddid(Integer.valueOf(new String(input,2,input.length-2).trim()));
+				}break;
+				case '-':{
+					p.deletedid(Integer.valueOf(new String(input,2,input.length-2).trim()));
+				}break;
+				case '*':{
+					for (Integer i:p.did)
+						Print.info(i.toString()+": "+u.finddep(i.intValue()).getName());
+				}
+			}
+			}break;
+			case 'b':
+				return;
+			case '?':
+				Print.usage(usage);
+				break;
+			default:
+				Print.error("Unknown command");
+				Print.help("see ? for help");
+			}
+		}
+	}
+	static void dep_cli (Departement d){
+		Print.entry("Name: ",d.getName());
+		Print.entry("Departement ID: " ,String.valueOf(d.id));
+		Print.entry("Students: ",String.valueOf(d.sid.size())+"Student");
+		Print.entry("Professors: ",String.valueOf(d.pid.size())+"Professor");
+		Print.entry("Courses: ",String.valueOf(d.cid.size())+"Course.");
+	}
+	static void course_cli (Course c){
+
+		Print.entry("Name: ",c.getName());
+		Print.entry("Course ID: " ,String.valueOf(c.id));
+		Print.entry("Students: ",String.valueOf(c.sid.size())+"Student");
+		Print.entry("Professors: ",String.valueOf(c.pid.size())+"Professor");
+		Print.entry("Departements: ",String.valueOf(c.did.size())+"Dep.");
 	}
 }

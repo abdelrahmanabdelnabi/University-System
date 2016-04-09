@@ -5,6 +5,7 @@ import java.util.*;
 
 public class Student extends Member {
 	int id;
+	float gpa;
 	List<Integer> cid = new ArrayList<Integer>();
 	List<Integer> pid = new ArrayList<Integer>();
 	List<Integer> did = new ArrayList<Integer>();	
@@ -24,6 +25,12 @@ public class Student extends Member {
 	void addpid(int i){
 		Integer id = new Integer(i);
 		pid.add(id);
+	}
+	public float getGpa() {
+		return gpa;
+	}
+	public void setGpa(float gpa) {
+		this.gpa = gpa;
 	}
 	void adddid(int i){
 		Integer id = new Integer(i);

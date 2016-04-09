@@ -8,22 +8,18 @@ public class University {
 	public void addstudent(String name){
 		Student S = new Student(name);
 		student.add(S);
-		//TODO sort
 	}
 	public void addcourse(String name){
 		Course  c = new Course(name);
 		course.add(c);
-		//TODO sort
 	}
 	public void adddep(String name){
 		Departement  d = new Departement(name);
 		dep.add(d);
-		//TODO sort
 	}
 	public void addprof(String name){
 		Professor  p = new Professor(name);
 		prof.add(p);
-		//TODO sort
 	}
 
 	public boolean delcourse(int id){
@@ -143,4 +139,5 @@ public class University {
 				return d;
 		return null;
 	}
+
 }
