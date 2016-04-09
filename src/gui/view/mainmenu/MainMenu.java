@@ -45,9 +45,18 @@ public class MainMenu extends JPanel {
 		editBtn.setBounds(223, 97, 120, 23);
 		add(editBtn);
 
-		JButton deleteBtn = new JButton("Delete");
-		deleteBtn.setBounds(223, 190, 120, 23);
-		add(deleteBtn);
+		JButton EnrollBtn = new JButton("Enroll");
+		EnrollBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+MainMenuEvent ev = new MainMenuEvent(this, "enroll");
+				
+				if(listener != null){
+					listener.MenuEventOccurred(ev);
+				}
+			}
+		});
+		EnrollBtn.setBounds(223, 190, 120, 23);
+		add(EnrollBtn);
 
 		JButton searchBtn = new JButton("Search/Delete");
 		searchBtn.setBounds(223, 143, 120, 23);

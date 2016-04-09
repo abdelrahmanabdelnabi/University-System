@@ -1,31 +1,42 @@
 package gui.controller;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.EventQueue;
+import gui.view.addmenu.AddMenuPanel;
+import gui.view.addmenu.MenuPanelEvent;
+import gui.view.addmenu.MenuPanelListener;
+import gui.view.enrollpanel.EnrollPanel;
+import gui.view.enrollpanel.EnrollPanelEvent;
+import gui.view.enrollpanel.EnrollPanelListener;
+import gui.view.mainmenu.MainMenu;
+import gui.view.mainmenu.MainMenuEvent;
+import gui.view.mainmenu.MainMenuListener;
+import gui.view.newcourse.CoursePanelListener;
+import gui.view.newcourse.NewCourseEvent;
+import gui.view.newcourse.NewCoursePanel;
+import gui.view.newdepartment.NewDepartmentEvent;
+import gui.view.newdepartment.NewDepartmentListener;
+import gui.view.newdepartment.NewDepartmentPanel;
+import gui.view.newprof.NewProfEvent;
+import gui.view.newprof.NewProfListener;
+import gui.view.newprof.NewProfPanel;
+import gui.view.newstudent.NewStudentPanel;
+import gui.view.newstudent.StudentPanelEvent;
+import gui.view.newstudent.StudentPanelListener;
+import gui.view.searchpanel.SearchPanel;
+import gui.view.searchpanel.SearchPanelEvent;
+import gui.view.searchpanel.SearchPanelListener;
 
-import javax.swing.JComboBox;
+import java.awt.EventQueue;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 
 import system.Course;
 import system.Departement;
 import system.Professor;
 import system.Student;
 import system.University;
-
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Frame extends JFrame {
 
@@ -36,6 +47,7 @@ public class Frame extends JFrame {
 	private NewProfPanel newProfPanel;
 	private SearchPanel searchPanel;
 	private NewCoursePanel newCoursePanel;
+	private EnrollPanel enrollPanel;
 
 	private University university = new University();
 
@@ -70,6 +82,7 @@ public class Frame extends JFrame {
 		newProfPanel = new NewProfPanel();
 		searchPanel = new SearchPanel();
 		newCoursePanel = new NewCoursePanel();
+		enrollPanel = new EnrollPanel();
 
 		// initialize the panels' listeners
 		initMainMenuListener();
@@ -79,6 +92,7 @@ public class Frame extends JFrame {
 		initSearchPanelListener();
 		initStudentPanelListener();
 		initNewCoursePanelListener();
+		initEnrollPanelListener();
 
 		// make a list of course names
 		// List<Course> courses = university.getCourse();
@@ -118,6 +132,11 @@ public class Frame extends JFrame {
 					revalidate();
 					setContentPane(searchPanel);
 					searchPanel.setVisible(true);
+					revalidate();
+				} else if (action.equals("enroll")) {
+					revalidate();
+					setContentPane(enrollPanel);
+					enrollPanel.setVisible(true);
 					revalidate();
 				}
 
@@ -342,6 +361,94 @@ public class Frame extends JFrame {
 					university.addcourse(name);
 				}
 			}
+		});
+	}
+
+	private void initEnrollPanelListener(){
+		enrollPanel.setEnrollPanelListener(new EnrollPanelListener() {
+			
+			@Override
+			public void EnrollPanelEventOccurred(EnrollPanelEvent e) {
+				String action = e.getAction();
+				if(action.equals("main")){
+					returnToMainMenu();
+				}
+				else if(action.equals("enroll")){
+					String fromName = e.getFromName();
+					String toName = e.getToName();
+					
+					int fromType = e.getFromType();
+					int toType = e.getToType();
+					
+					Student fromS;
+					Course fromC;
+					Professor fromP;
+					
+					Course toC;
+					Departement toD;
+					
+					if(fromType == 1){
+						fromS = university.findstudent(fromName);
+						if(fromS == null){
+							JOptionPane.showMessageDialog(getParent(),
+									"student not found", "Enroll Error",
+									JOptionPane.WARNING_MESSAGE);
+						}
+						if(toType == 1){
+							toC = university.findcourse(toName);
+							if(toC == null){
+								JOptionPane.showMessageDialog(getParent(),
+										"Course not found", "Enroll Error",
+										JOptionPane.WARNING_MESSAGE);
+							}
+							else{
+								//enroll the student in the course
+							}
+						}
+						else if(toType == 2){
+							toD = university.finddep(toName);
+							if(toD == null){
+								JOptionPane.showMessageDialog(getParent(),
+										"Course not found", "Enroll Error",
+										JOptionPane.WARNING_MESSAGE);
+							}else{
+								//enroll student in department
+							}
+						}
+					}else if(fromType == 2){
+						fromP = university.findprof(fromName);
+						if(fromP == null){
+							JOptionPane.showMessageDialog(getParent(),
+									"professor not found", "Enroll Error",
+									JOptionPane.WARNING_MESSAGE);
+						}
+						toC = university.findcourse(toName);
+						if(toC == null){
+							JOptionPane.showMessageDialog(getParent(),
+									"course not found", "Enroll Error",
+									JOptionPane.WARNING_MESSAGE);
+						}else{
+							// enroll professor in course
+						}
+					}else if(fromType == 3){
+						fromC = university.findcourse(fromName);
+						if(fromC == null){
+							JOptionPane.showMessageDialog(getParent(),
+									"course not found", "Enroll Error",
+									JOptionPane.WARNING_MESSAGE);
+						}else{
+							toD = university.finddep(toName);
+							if(toD == null){
+								JOptionPane.showMessageDialog(getParent(),
+										"course not found", "Enroll Error",
+										JOptionPane.WARNING_MESSAGE);
+							}else{
+								// enroll course in department
+							}
+							}
+						}
+					}
+				}
 		});
 	}
 
