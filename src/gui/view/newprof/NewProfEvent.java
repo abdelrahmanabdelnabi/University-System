@@ -4,6 +4,7 @@ import java.util.EventObject;
 
 public class NewProfEvent extends EventObject {
 
+	private String action;
 	private String firstName;
 	private String lastName;
 	private String phoneNumber;
@@ -71,6 +72,14 @@ public class NewProfEvent extends EventObject {
 
 	public void setGender(char gender) {
 		this.gender = gender;
+	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
 	}
 	
 	

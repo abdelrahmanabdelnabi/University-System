@@ -43,6 +43,20 @@ public class NewDepartmentPanel extends JPanel {
 		JButton btnNewButton = new JButton("Submit");
 		btnNewButton.setBounds(300, 340, 100, 23);
 		add(btnNewButton);
+		
+		JButton mainMenuBtn = new JButton("Main Menu");
+		mainMenuBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NewDepartmentEvent ev = new NewDepartmentEvent(this);
+				ev.setAction("main");
+				
+				if(listener != null){
+					listener.departmentEventOccurred(ev);
+				}
+			}
+		});
+		mainMenuBtn.setBounds(450, 340, 125, 23);
+		add(mainMenuBtn);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// get the department name entered

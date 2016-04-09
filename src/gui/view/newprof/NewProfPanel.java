@@ -154,6 +154,21 @@ public class NewProfPanel extends JPanel {
 		});
 		btnSubmit.setBounds(220, 330, 89, 23);
 		add(btnSubmit);
+		
+		JButton mainMenuBtn = new JButton("Main Menu");
+		mainMenuBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NewProfEvent ev = new NewProfEvent(this);
+				ev.setAction("main");
+				
+				if(listener != null){
+					listener.EventOccurred(ev);
+				}
+				
+			}
+		});
+		mainMenuBtn.setBounds(381, 330, 140, 23);
+		add(mainMenuBtn);
 	}
 	
 	public void setNewProfListener(NewProfListener listener){

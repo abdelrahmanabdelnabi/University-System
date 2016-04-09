@@ -16,6 +16,7 @@ public class EnrollPanelEvent extends EventObject{
 	
 	public EnrollPanelEvent(Object arg0, String action) {
 		super(arg0);
+		this.action = action;
 	}
 
 	public String getAction() {

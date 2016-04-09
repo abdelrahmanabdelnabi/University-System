@@ -23,6 +23,7 @@ public class SearchPanel extends JPanel {
 	
 	private SearchPanelListener listener;
 	private JButton btnDelete;
+	private JButton MainMenuBtn;
 
 	/**
 	 * Create the panel.
@@ -102,6 +103,20 @@ public class SearchPanel extends JPanel {
 		});
 		btnDelete.setBounds(470, 84, 89, 23);
 		add(btnDelete);
+		
+		MainMenuBtn = new JButton("Main Menu");
+		MainMenuBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SearchPanelEvent ev = new SearchPanelEvent(this);
+				ev.setAction("main");
+				
+				if(listener != null){
+					listener.SearchEventOccurred(ev);
+				}
+			}
+		});
+		MainMenuBtn.setBounds(399, 351, 160, 23);
+		add(MainMenuBtn);
 
 	}
 	

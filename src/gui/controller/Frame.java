@@ -184,7 +184,10 @@ public class Frame extends JFrame {
 				// check the action triggered
 				String action = e.getAction();
 				if (action.equals("new")) {
-					// do as appropriate
+					String name = e.getDepartmentName();
+					university.adddep(name);
+				}else if(action.equals("main")){
+					returnToMainMenu();
 				}
 
 			}
@@ -199,7 +202,13 @@ public class Frame extends JFrame {
 				// TODO create a new professor object with the given data in the
 				// event
 
-				university.addprof(e.getFirstName() + " " + e.getLastName());
+				String action = e.getAction();
+				if(action.equals("main")){
+					returnToMainMenu();
+				}
+				else{
+					university.addprof(e.getFirstName() + " " + e.getLastName());					
+				}
 			}
 		});
 	}
@@ -212,7 +221,9 @@ public class Frame extends JFrame {
 				String action = e.getAction();
 				int type = e.getType();
 
-				if (action.equals("search")) {
+				if (action.equals("main")) {
+					returnToMainMenu();
+				} else if (action.equals("search")) {
 					switch (type) {
 					case 1:
 						if (university.findstudent(e.getQuery()) != null) {
@@ -364,91 +375,88 @@ public class Frame extends JFrame {
 		});
 	}
 
-	private void initEnrollPanelListener(){
+	private void initEnrollPanelListener() {
 		enrollPanel.setEnrollPanelListener(new EnrollPanelListener() {
-			
+
 			@Override
 			public void EnrollPanelEventOccurred(EnrollPanelEvent e) {
 				String action = e.getAction();
-				if(action.equals("main")){
+				if (action.equals("main")) {
 					returnToMainMenu();
-				}
-				else if(action.equals("enroll")){
+				} else if (action.equals("enroll")) {
 					String fromName = e.getFromName();
 					String toName = e.getToName();
-					
+
 					int fromType = e.getFromType();
 					int toType = e.getToType();
-					
+
 					Student fromS;
 					Course fromC;
 					Professor fromP;
-					
+
 					Course toC;
 					Departement toD;
-					
-					if(fromType == 1){
+
+					if (fromType == 1) {
 						fromS = university.findstudent(fromName);
-						if(fromS == null){
+						if (fromS == null) {
 							JOptionPane.showMessageDialog(getParent(),
 									"student not found", "Enroll Error",
 									JOptionPane.WARNING_MESSAGE);
 						}
-						if(toType == 1){
+						if (toType == 1) {
 							toC = university.findcourse(toName);
-							if(toC == null){
+							if (toC == null) {
 								JOptionPane.showMessageDialog(getParent(),
 										"Course not found", "Enroll Error",
 										JOptionPane.WARNING_MESSAGE);
+							} else {
+								// enroll the student in the course
 							}
-							else{
-								//enroll the student in the course
-							}
-						}
-						else if(toType == 2){
+						} else if (toType == 2) {
 							toD = university.finddep(toName);
-							if(toD == null){
+							if (toD == null) {
 								JOptionPane.showMessageDialog(getParent(),
 										"Course not found", "Enroll Error",
 										JOptionPane.WARNING_MESSAGE);
-							}else{
-								//enroll student in department
+							} else {
+								// enroll student in department
 							}
 						}
-					}else if(fromType == 2){
+					} else if (fromType == 2) {
 						fromP = university.findprof(fromName);
-						if(fromP == null){
+						if (fromP == null) {
 							JOptionPane.showMessageDialog(getParent(),
 									"professor not found", "Enroll Error",
 									JOptionPane.WARNING_MESSAGE);
 						}
 						toC = university.findcourse(toName);
-						if(toC == null){
+						if (toC == null) {
 							JOptionPane.showMessageDialog(getParent(),
 									"course not found", "Enroll Error",
 									JOptionPane.WARNING_MESSAGE);
-						}else{
+						} else {
 							// enroll professor in course
 						}
-					}else if(fromType == 3){
+					} else if (fromType == 3) {
 						fromC = university.findcourse(fromName);
-						if(fromC == null){
+						if (fromC == null) {
 							JOptionPane.showMessageDialog(getParent(),
 									"course not found", "Enroll Error",
 									JOptionPane.WARNING_MESSAGE);
-						}else{
+						} else {
 							toD = university.finddep(toName);
-							if(toD == null){
+							if (toD == null) {
 								JOptionPane.showMessageDialog(getParent(),
 										"course not found", "Enroll Error",
 										JOptionPane.WARNING_MESSAGE);
-							}else{
+							} else {
 								// enroll course in department
-							}
 							}
 						}
 					}
 				}
+			}
 		});
 	}
 

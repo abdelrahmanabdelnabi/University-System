@@ -113,7 +113,7 @@ public class EnrollPanel extends JPanel {
 				int fromType = getFromType();
 				int toType = getToType();
 				
-				EnrollPanelEvent ev = new EnrollPanelEvent(this, "main");
+				EnrollPanelEvent ev = new EnrollPanelEvent(this, "enroll");
 				ev.setFromName(fromName);
 				ev.setFromType(fromType);
 				ev.setToName(toName);

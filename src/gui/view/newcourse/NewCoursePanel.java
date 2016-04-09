@@ -1,17 +1,16 @@
 package gui.view.newcourse;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-
+import java.awt.Color;
 import java.awt.Font;
-
-import javax.swing.JTextField;
-import javax.swing.JSpinner;
-import javax.swing.JButton;
-import javax.swing.SpinnerNumberModel;
-
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
 public class NewCoursePanel extends JPanel {
 	private JTextField NameField;
@@ -24,6 +23,7 @@ public class NewCoursePanel extends JPanel {
 	 */
 	public NewCoursePanel() {
 		setLayout(null);
+		setBackground(Color.yellow);
 		
 		JLabel lblNewCoureInfo = new JLabel("New Coure Info");
 		lblNewCoureInfo.setFont(new Font("Tahoma", Font.BOLD, 13));
